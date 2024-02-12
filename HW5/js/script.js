@@ -6,12 +6,12 @@ const priceData = {
     oRAngGEs: '48.7584',
   };
 
-  let newObject = {};
+  let updatedPriceData = {};
   
 for (let key in priceData){
-  newObject[key.toLowerCase()] = Number(priceData[key]).toFixed(2);
+  updatedPriceData[key.toLowerCase()] = Number(priceData[key]).toFixed(2);
 };
 
 
 
-console.log(newObject)
+console.log(updatedPriceData)

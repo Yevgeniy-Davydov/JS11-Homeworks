@@ -6,10 +6,9 @@ function iterativeOddSumTo(number) {
 
     let result = 0;
 
-    for (let i = 0; i <= number; i++){
-        if (i % 2 === 1){
-            result = result + i
-        }
+    for (let i = 1; i <= number; i += 2){
+        
+        result = result + i;
     }
     return result
     
@@ -31,7 +30,8 @@ function recursiveOddSumTo(number) {
     if (number % 2 === 1){
         return number + recursiveOddSumTo(number - 2)
     }
-    return (number - 1) + recursiveOddSumTo((number - 1) - 2);
+    let oddNumber = number - 1
+    return oddNumber + recursiveOddSumTo(oddNumber - 2);
 
     
     };

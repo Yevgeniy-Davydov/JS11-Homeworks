@@ -30,10 +30,7 @@ function recursiveOddSumTo(number) {
     if (number % 2 === 1){
         return number + recursiveOddSumTo(number - 2)
     }
-    let oddNumber = number - 1
-    return oddNumber + recursiveOddSumTo(oddNumber - 2);
-
-    
+        return recursiveOddSumTo(number-1)
     };
     
     console.log(recursiveOddSumTo(1));

@@ -14,21 +14,21 @@ function detonatorTimer(delay) {
 	let count = delay;
 
     let intervalId = setInterval(function(){
-        console.log(count--);
        
         if (count === 0) {
         
-             clearInterval(intervalId);
+            clearInterval(intervalId);
+            console.log("BOOM!")
+
+        } else {
+            console.log(count--);
         }
        
     }, 1000)
 
-     setTimeout(function(){
-            console.log("BOOM!")
-        }, (delay + 1) * 1000)
 }
 
-2 Task - setTimeout
+// 2 Task - setTimeout
 
 detonatorTimer(3);
 // 3
@@ -41,16 +41,17 @@ function detonatorTimer(delay) {
     let time = 1000;
     let count = delay;
 
-    function counter (){
-        console.log(count--);
+    let timeoutId = setTimeout(function counter (){
 
-        if (count > 0){
-            setTimeout(counter, time);
+        timeoutId = setTimeout(counter, time); 
+
+        if (count === 0){
+            clearTimeout(timeoutId);
+            console.log("BOOM!")
+        } else {
+            console.log(count--);  
         }
-    }
-    setTimeout(counter, time);
-
-    setTimeout(() => console.log("BOOM!"), (delay + 1) * 1000)
+    }, time);
 
 }
 

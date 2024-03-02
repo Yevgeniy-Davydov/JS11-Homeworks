@@ -8,16 +8,16 @@ function durationBetweenDates(start = "01 Jan 1970", end = "02 Jan 1970", unit =
     let difference = Math.abs(new Date (end) - new Date (start));
 
     switch (unit){
-        case "seconds" : return Math.floor(difference / 1000) + " " + unit;
+        case "seconds" : return `${Math.floor(difference / 1000)} ${unit}`;
         break;
 
-        case "minutes" : return Math.floor(difference / 60000) + " " + unit;
+        case "minutes" : return `${Math.floor(difference / 60000)} ${unit}`;
         break;
 
-        case "hours" : return Math.floor(difference / 3600000) + " " + unit;
+        case "hours" : return `${Math.floor(difference / 3600000)} ${unit}`;
         break;
 
-        case "days" : return Math.floor(difference / 86400000) + " " + unit;
+        case "days" : return `${Math.floor(difference / 86400000)} ${unit}`;
         break;
 
     }

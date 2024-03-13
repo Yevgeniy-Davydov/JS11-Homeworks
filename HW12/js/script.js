@@ -14,9 +14,8 @@ console.log(firstElementInSection)
 
 
 // для елементу списку з текстом 'Пункт 5'
-let listCollection = document.querySelectorAll("ul li.text");
-let forthListItem = listCollection[1];
-let fifthListItem = forthListItem.nextElementSibling;
+
+let fifthListItem = document.querySelector("ul :nth-child(5)");
 console.log(fifthListItem)
 
 

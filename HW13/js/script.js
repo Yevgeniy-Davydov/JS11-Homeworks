@@ -1,11 +1,20 @@
 "use strict"
 
+// DOM Variables
 
 const button = document.querySelector(".button");
 const body = document.querySelector("body");
 const dateText = document.querySelector(".text");
 
+// // Date format function
 
+function formatDate(number){
+    if (number < 10){
+        return `0${number}`
+    }else{
+        return `${number}`
+    }
+};
 
 // // Date
 
@@ -17,76 +26,89 @@ function getCustomDate() {
     let year = currentDate.getFullYear();
 
     let month = currentDate.getMonth() + 1;
-    let currentMonth = month < 10 ? `0${month}` : `${month}`;
+    let currentMonth = formatDate(month);
+
 
     let date = currentDate.getDate();
-    let currentDay = date < 10 ? `0${date}` : `${date}`;
+    let currentDay = formatDate(date);
+
 
     let hours = currentDate.getHours();
-    let currentHours = hours < 10 ? `0${hours}` : `${hours}`;
+    let currentHours = formatDate(hours);
+
 
     let minutes = currentDate.getMinutes();
-    let currentMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    let currentMinutes = formatDate(minutes);
+
 
     let seconds = currentDate.getSeconds();
-    let currentSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+    let currentSeconds = formatDate(seconds);
+
 
     return `${currentDay}-${currentMonth}-${year} ${currentHours}:${currentMinutes}:${currentSeconds}`;
     
 };
 
+// // Theme change function
 
-// // EventListener-color change
+function changeTheme(theme){
+    if(theme === "dark"){
+        button.textContent = "Turn on";
+        button.classList.add("active");
+        dateText.style.color = "beige";
+        dateText.textContent = `Last turn off: ${getCustomDate()}`;
+        body.classList.add("active__body");
+
+    }else if(theme === "light"){
+        button.textContent = "Turn off";
+        button.classList.remove("active");
+        dateText.style.color = "blue";
+        dateText.textContent = `Last turn on: ${getCustomDate()}`;
+        body.classList.remove("active__body");
+
+    }
+};
+
+// // Event Listener
 
 button.addEventListener("click", (event) => {
 
     event.target.classList.toggle("active");
-    body.classList.toggle("active__body");
+
 
     if(event.target.classList.contains("active")){
-        button.textContent = "Turn on";
-        dateText.style.color = "beige";
-        dateText.textContent = `Last turn off: ${getCustomDate()}`;
+
+        changeTheme("dark");
+    
         localStorage.setItem("temporaryDate", JSON.stringify(`Last turn off: ${getCustomDate()}`));
+        localStorage.setItem("temporaryTheme", "dark");
 
     }else{
-        button.textContent = "Turn off";
-        dateText.style.color = "blue";
-        dateText.textContent = `Last turn on: ${getCustomDate()}`;
+
+        changeTheme("light");
+
         localStorage.setItem("temporaryDate", JSON.stringify(`Last turn on: ${getCustomDate()}`));
+        localStorage.setItem("temporaryTheme", "light");
+
 
 
     }
     
 });
-// EventListener - localStorage
 
-button.addEventListener("click", () => {
-   
-    localStorage.setItem("temporaryButtonState", JSON.stringify(button.classList));
-    localStorage.setItem("temporaryBackground", JSON.stringify(body.classList));
+// // Initialisation
 
+function initTheme(){
 
-});
+    let getTheTheme = localStorage.getItem("temporaryTheme");
+    changeTheme(getTheTheme);
 
+    let getTheDate = JSON.parse(localStorage.getItem("temporaryDate")) || "";
+    dateText.textContent = `${getTheDate}`;
 
-// LocalStorage
+};
 
-
-let getTheDate = JSON.parse(localStorage.getItem("temporaryDate"));
-dateText.textContent = `${getTheDate}`;
-
-
-// // Its not working, but i suppose its still useful
-// let getBackgroundState = JSON.parse(localStorage.getItem("temporaryBackground"));
-// body.classList.add(getBackgroundState);
-// console.log(getBackgroundState)
-
-// let getButtonState = JSON.parse(localStorage.getItem("temporaryButtonState"));
-// button.classList.add(`${getButtonState}`);
-
-// console.log(getButtonState)
-
+initTheme()
 
 
 

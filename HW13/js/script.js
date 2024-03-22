@@ -3,7 +3,7 @@
 // DOM Variables
 
 const button = document.querySelector(".button");
-const body = document.querySelector("body");
+const body = document.body;
 const dateText = document.querySelector(".text");
 
 // // Date format function
@@ -49,9 +49,13 @@ function getCustomDate() {
     
 };
 
+
+let customDate = getCustomDate();
+
 // // Theme change function
 
 function changeTheme(theme){
+
     if(theme === "dark"){
         button.textContent = "Turn on";
         button.classList.add("active");
@@ -80,15 +84,15 @@ button.addEventListener("click", (event) => {
 
         changeTheme("dark");
     
-        localStorage.setItem("temporaryDate", JSON.stringify(`Last turn off: ${getCustomDate()}`));
-        localStorage.setItem("temporaryTheme", "dark");
+        localStorage.setItem("date", `Last turn off: ${getCustomDate()}`);
+        localStorage.setItem("theme", "dark");
 
     }else{
 
         changeTheme("light");
 
-        localStorage.setItem("temporaryDate", JSON.stringify(`Last turn on: ${getCustomDate()}`));
-        localStorage.setItem("temporaryTheme", "light");
+        localStorage.setItem("date", `Last turn on: ${getCustomDate()}`);
+        localStorage.setItem("theme", "light");
 
 
 
@@ -100,11 +104,11 @@ button.addEventListener("click", (event) => {
 
 function initTheme(){
 
-    let getTheTheme = localStorage.getItem("temporaryTheme");
-    changeTheme(getTheTheme);
+    let themeFromLocalstorage = localStorage.getItem("theme");
+    changeTheme(themeFromLocalstorage);
 
-    let getTheDate = JSON.parse(localStorage.getItem("temporaryDate")) || "";
-    dateText.textContent = `${getTheDate}`;
+    let dateFromLocalStorage = localStorage.getItem("date") || "";
+    dateText.textContent = dateFromLocalStorage;
 
 };
 

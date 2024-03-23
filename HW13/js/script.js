@@ -50,7 +50,30 @@ function getCustomDate() {
 };
 
 
-let customDate = getCustomDate();
+
+// // Event Listener
+
+button.addEventListener("click", (event) => {
+
+    event.target.classList.toggle("active");
+    localStorage.setItem("date", JSON.stringify(getCustomDate()));
+
+
+
+    if(event.target.classList.contains("active")){
+
+        changeTheme("dark");
+        localStorage.setItem("theme", "dark");
+
+    }else{
+
+        changeTheme("light");
+        localStorage.setItem("theme", "light");
+
+    }
+    
+});
+
 
 // // Theme change function
 
@@ -60,45 +83,19 @@ function changeTheme(theme){
         button.textContent = "Turn on";
         button.classList.add("active");
         dateText.style.color = "beige";
-        dateText.textContent = `Last turn off: ${getCustomDate()}`;
+        dateText.textContent = `Last turn off: ${JSON.parse(localStorage.getItem("date"))}` || "";
         body.classList.add("active__body");
 
     }else if(theme === "light"){
         button.textContent = "Turn off";
         button.classList.remove("active");
         dateText.style.color = "blue";
-        dateText.textContent = `Last turn on: ${getCustomDate()}`;
+        dateText.textContent = `Last turn on: ${JSON.parse(localStorage.getItem("date"))}` || "";
         body.classList.remove("active__body");
 
     }
 };
 
-// // Event Listener
-
-button.addEventListener("click", (event) => {
-
-    event.target.classList.toggle("active");
-
-
-    if(event.target.classList.contains("active")){
-
-        changeTheme("dark");
-    
-        localStorage.setItem("date", `Last turn off: ${getCustomDate()}`);
-        localStorage.setItem("theme", "dark");
-
-    }else{
-
-        changeTheme("light");
-
-        localStorage.setItem("date", `Last turn on: ${getCustomDate()}`);
-        localStorage.setItem("theme", "light");
-
-
-
-    }
-    
-});
 
 // // Initialisation
 
@@ -106,9 +103,6 @@ function initTheme(){
 
     let themeFromLocalstorage = localStorage.getItem("theme");
     changeTheme(themeFromLocalstorage);
-
-    let dateFromLocalStorage = localStorage.getItem("date") || "";
-    dateText.textContent = dateFromLocalStorage;
 
 };
 

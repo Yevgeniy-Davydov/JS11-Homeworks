@@ -56,7 +56,7 @@ function getCustomDate() {
 button.addEventListener("click", (event) => {
 
     event.target.classList.toggle("active");
-    localStorage.setItem("date", JSON.stringify(getCustomDate()));
+    localStorage.setItem("date", getCustomDate());
 
 
 
@@ -83,14 +83,14 @@ function changeTheme(theme){
         button.textContent = "Turn on";
         button.classList.add("active");
         dateText.style.color = "beige";
-        dateText.textContent = `Last turn off: ${JSON.parse(localStorage.getItem("date"))}` || "";
+        dateText.textContent = `Last turn off: ${localStorage.getItem("date")}` || "";
         body.classList.add("active__body");
 
     }else if(theme === "light"){
         button.textContent = "Turn off";
         button.classList.remove("active");
         dateText.style.color = "blue";
-        dateText.textContent = `Last turn on: ${JSON.parse(localStorage.getItem("date"))}` || "";
+        dateText.textContent = `Last turn on: ${localStorage.getItem("date")}` || "";
         body.classList.remove("active__body");
 
     }

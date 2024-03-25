@@ -1,0 +1,49 @@
+body {
+    margin: 0px;
+    background-color: beige;
+
+    
+    
+}
+.active__body{
+    margin: 0px;
+    background-color: blue;
+
+}
+.block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50rem;
+
+}
+.button{
+    width: 100px;
+    background-color: blue;
+    color: beige;
+    border: 1px solid blue;
+    border-radius: 20px;
+    height: 40px;
+}
+.text{
+    margin: 50px;
+    color: blue;
+}
+.active{
+    width: 100px;
+    background-color: beige;
+    color: blue;
+    border: 1px solid blue;
+    border-radius: 20px;
+    height: 40px;
+}
+@media all and (min-width: 320px) and (max-width: 780px){
+    .block{
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+
+    }
+
+}

@@ -38,7 +38,7 @@ export const getFollowers = async (userName, amount = 10) => {
 
 class API {
   API_URL = "https://api.github.com";
-  #API_TOKEN = "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";
+  #API_TOKEN = "";
 
   async getUser(userName) {
     const response = await fetch(`${this.API_URL}/users/${userName}`, {

@@ -1,5 +1,4 @@
-import { getUser, getFollowers } from "./api.js";
-// import { api } from "./api.js";
+import { getUser, getFollowers, getRepositories } from "./api.js";
 import { formatDate } from "./date.js";
 import { showAlert, hideAlert } from "./alert.js";
 import { debounce } from "./utils.js";
@@ -21,7 +20,8 @@ const showProfile = (
     location,
     created_at,
   },
-  followersList
+  followersList,
+  repositories
 ) => {
   profile.innerHTML = `
         <div class="card card-body mb-3">
@@ -70,6 +70,22 @@ const showProfile = (
   });
 
   followersElement.append(list);
+
+  const reposElement = document.querySelector(".repos");
+  const listOfRepos = document.createElement("ul");
+
+  repositories.forEach((repo) =>{
+    console.log("repo: ", repo.name)
+    const li = document.createElement("li");
+    li.textContent = repo.name;
+
+    listOfRepos.append(li);
+
+  });
+  reposElement.append(listOfRepos);
+
+
+
 };
 
 const clearProfile = () => {
@@ -88,13 +104,9 @@ const handleInput = async ({ target: { value } }) => {
       return;
     }
 
-    const user = await api.getUser(inputValue);
-    const followers = await api.getFollowers(inputValue, 6);
+    const [user, followers, repos] = await Promise.all([getUser(inputValue), getFollowers(inputValue, 6), getRepositories(inputValue)])
 
-    // Promise.all
-    // const [user, followers] = await Promise.all([getUser(inputValue), getFollowers(inputValue, 6)])
-
-    showProfile(user, followers);
+    showProfile(user, followers, repos);
   } catch (error) {
     showAlert(error.message, "danger", 2000);
   }

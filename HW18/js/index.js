@@ -1,5 +1,5 @@
-// import { getUser, getFollowers } from "./api.js";
-import { api } from "./api.js";
+import { getUser, getFollowers } from "./api.js";
+// import { api } from "./api.js";
 import { formatDate } from "./date.js";
 import { showAlert, hideAlert } from "./alert.js";
 import { debounce } from "./utils.js";

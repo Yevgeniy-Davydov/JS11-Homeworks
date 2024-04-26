@@ -36,25 +36,25 @@ export const getFollowers = async (userName, amount = 10) => {
   return data;
 };
 
-class API {
-  API_URL = "https://api.github.com";
-  #API_TOKEN = "";
+// class API {
+//   API_URL = "https://api.github.com";
+//   #API_TOKEN = "";
 
-  async getUser(userName) {
-    const response = await fetch(`${this.API_URL}/users/${userName}`, {
-      headers: {
-        Authorization: `Bearer ${this.#API_TOKEN}`,
-      },
-    });
-    const data = await response.json();
+//   async getUser(userName) {
+//     const response = await fetch(`${this.API_URL}/users/${userName}`, {
+//       headers: {
+//         Authorization: `Bearer ${this.#API_TOKEN}`,
+//       },
+//     });
+//     const data = await response.json();
 
-    // Error handling
-    if (!response.ok) {
-      throw new Error(data.message);
-    }
+//     // Error handling
+//     if (!response.ok) {
+//       throw new Error(data.message);
+//     }
 
-    return data;
-  }
+//     return data;
+//   }
 
   async getFollowers(userName, amount = 10) {
     const response = await fetch(
@@ -74,6 +74,6 @@ class API {
 
     return data;
   }
-}
+// }
 
-export const api = new API();
+// export const api = new API();
